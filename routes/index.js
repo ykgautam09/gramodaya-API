@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('./../modules/dbConnection');
-const utilFunc = require('./../modules/utilityFunc')
+const utilFunc = require('./../modules/utilityFunc');
 const test = require('../modules/test');
 
 // capture report
@@ -29,18 +29,16 @@ router.post('/reports', (req, res) => {
         let response = {
             "status": "success",
             "reportID": reportID
-        }
+        };
         return res.json(response);
-    })
+    });
 })
 
 // send aggregate report
 router.get('/reports', (req, res) => {
     let _id = req.query.reportID;
-    console.log(_id, '==========');
     connection.connection.query('SELECT `market_id`,`cmdty_id`,`market_name`,`cmdty_name` FROM `report_detail` WHERE `report_id` =? LIMIT 1;', [_id], (err, queryResult) => {
         if (err) throw err;
-        console.log(queryResult, '-----------');
         let marketID = queryResult[0].market_id;
         let cmdtyID = queryResult[0].cmdty_id;
         let marketName = queryResult[0].market_name;
@@ -67,12 +65,12 @@ router.get('/reports', (req, res) => {
                 price: parseFloat(totalUnitPrice / result.length),
             };
             res.send(response);
-        })
-    })
+        });
+    });
 })
 
-router.get('/test',async(req,res)=>{
-    await res.json(test.verifyAPI())
+router.get('/test', async (req, res) => {
+    res.json(test.verifyAPI());
 })
 
 
