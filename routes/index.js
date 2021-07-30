@@ -20,7 +20,7 @@ router.post('/reports', (req, res) => {
         'price': req.body.price,
         'report_id': reportID
     };
-    if (test.verifyDataType(data)) {
+    if (test.verifyReport(data)) {
         res.send('data not in correct format')
     }
     console.log(data);
@@ -69,6 +69,10 @@ router.get('/reports', (req, res) => {
             res.send(response);
         })
     })
+})
+
+router.get('/test',async(req,res)=>{
+    await res.json(test.verifyAPI())
 })
 
 

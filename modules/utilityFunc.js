@@ -1,4 +1,4 @@
-const randomstring = require('randomstring')
+const randomstring = require('randomstring');
 
 
 function generateID() {
@@ -9,6 +9,16 @@ function generateID() {
     });
 }
 
+function genAlphaString() {
+    return randomstring.generate({
+        length: 6,
+        charset: 'alphabetic',
+        capitalization: 'lowercase'
+    });
+}
+
+
 module.exports = {
-    generateID
+    generateID,
+    genAlphaString
 }
